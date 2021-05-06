@@ -1,13 +1,14 @@
 <template>
-    <div class="shadow-sm p-3 mb-5 bg-body rounded">
+    <div class="sticky-top shadow-sm p-3 mb-5 bg-body rounded">
       <div id="nav" class="container-sm">
         <div class="row">
           <div class="col-sm">
-            <img style="height:40px" alt="Ausens logo" src="../assets/logo.svg">
+            
+            <router-link to="/"><img v-on:click="changeClassPolez" style="height:40px" alt="Ausens logo" src="../assets/logo.svg"></router-link>
           </div>
           <div class="col-sm" style="margin-top:0.5%" v-if="reglog">
             <a v-on:click="changeClassPolez"><router-link  :class="poleznoe" to="/">Полезное</router-link></a>
-            <a v-on:click="changeClassRec"><router-link  :class="rec" style="margin-left:10%" to="/recomendation">Рекомеднации</router-link></a>
+            <a v-on:click="changeClassRec"><router-link  :class="rec" style="margin-left:10%" to="/recomendation">Рекомендации</router-link></a>
             <a v-on:click="changeClassTren"><router-link  :class="tren" style="margin-left:10%" to="/trainings">Тренировки</router-link></a>
 
             <a v-if="!authed" v-on:click="changeClassProfLogin"><router-link  :class="prof" style="margin-left:10%" to="/login">Профиль</router-link></a>
@@ -26,7 +27,7 @@ export default {
       rec: 'nav_link',
       tren: 'nav_link',
       prof: 'nav_link',
-      authed: true,
+      authed: false,
       reglog: true
     }
   },
@@ -70,7 +71,19 @@ export default {
       this.prof = 'nav_link_active';
 
       this.reglog = false;
+    },
+    checkLogged(){
+        if(localStorage.getItem('token')!=null){
+          this.authed = true;
+        }else{
+          this.authed = false;
+        }
     }
+  },
+  created(){
+    setInterval(()=>{
+      this.checkLogged();
+    },1000);
   }
 }
 </script>

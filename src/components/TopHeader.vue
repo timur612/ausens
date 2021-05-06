@@ -4,7 +4,7 @@
             <div class="row justify-content-end">
                 <div class="col-sm-3">
                     <img style="width:6%" src="../assets/eye.svg" alt="...">
-                    <a href="#" class="bvi-open" style="color:white;text-decoration:none;margin-left:2%" title="Версия для слабовидящих">Версия сайта для слабовидящих</a>
+                    <a href="#" class="bvi-open" style="color:white;text-decoration:none;margin-left:2%" title="Версия для слабовидящих">Версия для слабовидящих</a>
                 </div>
                 <div class="col-sm-3">
                     <img style="width:6%" src="../assets/rus_flag.svg" alt="...">

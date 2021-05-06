@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-sm-2">
-                <router-link to="/trainings" style="width:6%;height:6%;color:black;"> <img src="../assets/back.svg" alt=""> </router-link>
+                <a v-on:click="back" style="width:6%;height:6%;color:black;"> <img src="../assets/back.svg" alt=""> </a>
             </div>
             <div class="col-sm-10" style="width:65%">
                 <youtube :video-id="videoId" :player-vars="playerVars" @playing="playing"></youtube>
@@ -27,6 +27,9 @@ export default {
   methods: {
     playing() {
       console.log('\o/ we are watching!!!')
+    },
+    back(){
+      this.$router.go(-1);
     }
   }
 }

@@ -6,6 +6,7 @@ import Recs from '../views/Recs.vue'
 import Trains from '../views/Trains.vue'
 import VideoTrains from '../views/VideoTrains.vue'
 import Profile from '../views/Profile.vue'
+import Login from '../views/Login.vue'
 
 Vue.use(VueRouter)
 
@@ -36,6 +37,10 @@ const routes = [
   {
     path:'/profile',
     component: Profile
+  },
+  {
+    path:'/login',
+    component: Login
   }
 ]
 

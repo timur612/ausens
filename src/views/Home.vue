@@ -127,7 +127,8 @@ export default {
   },
   components: {
     
-  }
+  },
+  
 }
 </script>
 
