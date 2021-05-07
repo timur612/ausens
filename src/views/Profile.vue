@@ -7,7 +7,9 @@
                 <p><a v-on:click="goToPodpiska" :class="[isPodpiska ? 'btn_prof_active' : 'btn_prof']" style="cursor: pointer;">Подписка</a></p>
             </div>
 
-            <div v-if="clicked" class="row shadow-sm p-3 mb-5 bg-body rounded" :class="classModal" style="background-color:white;position:absolute; width:30%; left:21rem;top:15.8rem">
+            <div v-if="bscreen" class="overlay"></div>
+
+            <div v-if="clicked" class=" row shadow-sm p-3 mb-5 bg-body rounded" :class="classModal" style="background-color:white;position:absolute; width:30%; left:21rem;top:15.8rem">
                     <form>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Введите адрес</label>
@@ -21,12 +23,12 @@
                     </form>
             </div>
 
-            <div v-if="exitClicked" class="row shadow-sm p-3 mb-5 bg-body rounded" style="background-color:white;position:absolute; width:45%; left:16rem;top:14rem">
+            <div v-if="exitClicked" class="overlay-message row shadow-sm p-3  bg-body rounded" style="background-color:white;position:absolute; width:45%; left:30%;top:50%;">
                     <form>
-                        <div class="mb-3 text-center">
+                        <div class="mb-3 text-center" style="padding-top:2rem">
                             <p class="h4"> Вы уверены, что хотите выйти? </p>
                         </div>
-                        <div class="row">
+                        <div class="row" style="padding-bottom:1.2rem">
                             <div class="col-sm d-flex justify-content-center"><p v-on:click="exit" class="btn backbtn" style="background-color: #11B46F;">Выйти</p></div>
                             <div class="col-sm d-flex justify-content-center"><p v-on:click="onChangeCloseExit" class="btn backbtn" style="cursor: pointer;background-color: #fffff;color:black;border:0.01rem solid black">Отмена</p></div>
                         </div>
@@ -103,7 +105,10 @@
             <div class="col-sm-6" v-if="isTest">
                 <p class="h3"> Предрасположенность к болезням: </p>
                 <p class="h5 mt-4" v-if="testResult===''"> Чтобы узнать рекомендации, пройдите тестирование </p>
-                <p class="h4 mt-5" v-if="testResult!==''">У вас предрасположенность к <span style="color:#11B46F">{{testResult}}</span> </p>
+                <p class="h4 mt-5" v-if="testResult!==''">Высокая вероятность, что у Вас предрасположенность к <span style="color:#11B46F">{{testResult}}</span> </p>
+                <div class="progress mt-3">
+                    <div class="progress-bar" role="progressbar" style="width: 90%;background-color:#11B46F" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
                 <!-- <div class="row mt-5">
                     <div class="col-sm">
                         <p>Сердечно-сосудистые</p>
@@ -133,6 +138,12 @@
                     </div>
                 </div> -->
             </div>
+
+            <div class="col-sm-6" v-if="isPodpiska">
+                <p class="h3" style="font-weight:590"> Подписка не оформлена </p>
+
+                <p class="h5 mt-5" style="color:#11B46F;cursor:pointer">Оформить подписку</p>
+            </div>
         </div>
     </div>
 </template>
@@ -142,6 +153,7 @@ import axios from 'axios';
 export default {
     data(){
         return{
+            bscreen:false,
             isUchet: true,
             isTest: false,
             isPodpiska: false,
@@ -183,9 +195,11 @@ export default {
         },
         onChangeShowExit(){
             this.exitClicked = true;
+            this.bscreen = true;
         },
         onChangeCloseExit(){
             this.exitClicked = false;
+            this.bscreen = false;
         },
         exit(){
             localStorage.removeItem('token');
@@ -236,6 +250,10 @@ export default {
 </script>
 
 <style scoped>
+.blackScreen{
+    background-color: black;
+    opacity: 0.5;
+}
 .btn_prof{
     color:black;
     text-decoration: none;
@@ -260,5 +278,22 @@ export default {
 @keyframes box {
  from { top: 10rem; }
  to { top: 15rem; }
+}
+
+.overlay {
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background-color:black;
+    opacity:0.7;
+    z-index:1001;
+}
+.overlay-message{
+    position: fixed;
+    background-color:#fff;
+    opacity:1;
+    z-index:1002;
 }
 </style>
