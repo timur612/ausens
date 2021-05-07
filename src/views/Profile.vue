@@ -11,10 +11,10 @@
                     <form>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Введите адрес</label>
-                            <input :value="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input  v-model="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                         </div>
                         <div class="row">
-                            <div class="col-sm"><button class="btn backbtn" style="background-color: #11B46F;">Сохранить</button></div>
+                            <div class="col-sm"><button class="btn backbtn" v-on:click="changeEmail" style="background-color: #11B46F;">Сохранить</button></div>
                             <div class="col-sm"><p v-on:click="onChangeClose" class="btn backbtn" style="cursor: pointer;background-color: #fffff;color:black;border:0.01rem solid black">Отменить</p></div>
                         </div>
                         
@@ -153,7 +153,7 @@ export default {
             age:'64',
             height:'170',
             weight:'70',
-            email:'example@gmail.com',
+            email:'',
         }
     },
     methods:{
@@ -189,6 +189,20 @@ export default {
         exit(){
             localStorage.removeItem('token');
             this.$router.push('/')
+        },
+        changeEmail(){
+            axios
+                .patch('http://localhost:3000/users/'+localStorage.getItem('token'),
+                JSON.stringify({
+                    email: this.email
+                }),
+                {headers: {"Content-Type": "application/json"  }})
+                .then(res=>{
+                    console.log(res.data.email);
+                })
+                .catch(e=>{
+                    console.log(e)
+                })
         }
         
     },
@@ -197,7 +211,7 @@ export default {
             .get('http://localhost:3000/users/'+localStorage.getItem('token'))
             .then(res=>{
                 this.name = res.data.name;
-                this.lastname = res.data.lastname;
+                this.lastname = res.data.lastName;
                 this.email = res.data.email;
             })
             .catch(e=>{

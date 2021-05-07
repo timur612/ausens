@@ -7,6 +7,8 @@ import Trains from '../views/Trains.vue'
 import VideoTrains from '../views/VideoTrains.vue'
 import Profile from '../views/Profile.vue'
 import Login from '../views/Login.vue'
+import Paper from '../views/Paper.vue'
+import Test from '../views/Tests.vue'
 
 Vue.use(VueRouter)
 
@@ -41,6 +43,14 @@ const routes = [
   {
     path:'/login',
     component: Login
+  },
+  {
+    path:'/paper',
+    component: Paper
+  },
+  {
+    path:'/test',
+    component: Test
   }
 ]
 

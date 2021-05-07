@@ -13,7 +13,7 @@
                 <img src="../assets/arrhythmia.svg" alt="...">
               </div>
               <div class="col-sm-7 mt-4">
-                  <a class="h3" href="#" :class="classes_ssz" style="text-decoration: none;">Сердечно-сосудистые</a>
+                  <router-link class="h3" to="/paper" :class="classes_ssz" style="text-decoration: none;">Сердечно-сосудистые</router-link>
               </div>
               <div class="col-sm-2" style="margin-top:5%">
                 <img :src="src_ssz" alt="">
