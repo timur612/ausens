@@ -1,5 +1,5 @@
 # Ausens
-
+![alt text](https://github.com/timur612/ausens/blob/master/readme/logo%20svg.svg)
 ## Project setup
 ```
 npm install
