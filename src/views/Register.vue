@@ -40,13 +40,13 @@ export default {
     methods:{
         signIn(){
             axios
-                .post('http://localhost:3000/users',JSON.stringify({
+                .post('https://ausensai.herokuapp.com/users',JSON.stringify({
                     email: this.email,
                     password: this.pass
                 }),{headers: {"Content-Type": "application/json"  }})
                 .then(res=>{
                     localStorage.setItem('token',res.data.user._id);
-                    this.$router.push({ path: '/', })
+                    this.$router.push({ path: '/test', })
                 })
                 .catch(e=>{
                     console.log(e)

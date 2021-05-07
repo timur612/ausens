@@ -102,9 +102,9 @@
 
             <div class="col-sm-6" v-if="isTest">
                 <p class="h3"> Предрасположенность к болезням: </p>
-                <p class="h5 mt-4"> Чтобы узнать рекомендации, пройдите тестирование </p>
-
-                <div class="row mt-5">
+                <p class="h5 mt-4" v-if="testResult===''"> Чтобы узнать рекомендации, пройдите тестирование </p>
+                <p class="h4 mt-5" v-if="testResult!==''">У вас предрасположенность к <span style="color:#11B46F">{{testResult}}</span> </p>
+                <!-- <div class="row mt-5">
                     <div class="col-sm">
                         <p>Сердечно-сосудистые</p>
                         <div class="progress">
@@ -131,7 +131,7 @@
                             <div class="progress-bar" role="progressbar" style="width: 5%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -147,6 +147,7 @@ export default {
             isPodpiska: false,
             clicked: false,
             exitClicked: false,
+            testResult:'',
             classModal:'',
             name:'',
             lastname: '',
@@ -192,7 +193,7 @@ export default {
         },
         changeEmail(){
             axios
-                .patch('http://localhost:3000/users/'+localStorage.getItem('token'),
+                .patch('https://ausensai.herokuapp.com/users/'+localStorage.getItem('token'),
                 JSON.stringify({
                     email: this.email
                 }),
@@ -208,11 +209,24 @@ export default {
     },
     created(){
         axios
-            .get('http://localhost:3000/users/'+localStorage.getItem('token'))
+            .get('https://ausensai.herokuapp.com/users/'+localStorage.getItem('token'))
             .then(res=>{
                 this.name = res.data.name;
                 this.lastname = res.data.lastName;
                 this.email = res.data.email;
+                if(res.data.testResult==1){
+                    this.testResult = 'Диабет';
+                }
+                if(res.data.testResult==2){
+                    this.testResult = 'Артрит';
+                }
+                if(res.data.testResult==0){
+                    this.testResult = 'Дименция';
+                }
+                if(res.data.testResult==4){
+                    this.testResult = 'Сердечно-сосудистое заболевание';
+                }
+                
             })
             .catch(e=>{
                 console.log(e);

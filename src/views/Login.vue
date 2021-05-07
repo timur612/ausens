@@ -48,7 +48,7 @@ export default {
                     password:this.pass
                 })
             axios
-                .post('http://localhost:3000/users/login',body,{headers: {"Content-Type": "application/json"  }})
+                .post('https://ausensai.herokuapp.com/users/login',body,{headers: {"Content-Type": "application/json"  }})
                 .then(res=>{
                     localStorage.setItem('token',res.data);
                     this.$router.push({ path: '/', })
