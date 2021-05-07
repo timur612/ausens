@@ -87,7 +87,7 @@ export default {
         saveTo(){
             axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
             axios
-                .post('http://goddesu.pythonanywhere.com/results',
+                .post('https://goddesu.pythonanywhere.com/results',
                 JSON.stringify({
                     answers: this.answers
                 }),
