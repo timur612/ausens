@@ -8,7 +8,12 @@ import VideoTrains from '../views/VideoTrains.vue'
 import Profile from '../views/Profile.vue'
 import Login from '../views/Login.vue'
 import Paper from '../views/Paper.vue'
+import PaperDem from '../views/PaperDem.vue'
+import PaperDia from '../views/Paperdia.vue'
+import PaperArt from '../views/PaperArt.vue'
 import Test from '../views/Tests.vue'
+import Testresult from '../views/Testresullts.vue'
+import Podpiska from '../views/Podpiska.vue'
 
 Vue.use(VueRouter)
 
@@ -49,8 +54,28 @@ const routes = [
     component: Paper
   },
   {
+    path:'/paperdem',
+    component: PaperDem
+  },
+  {
+    path:'/paperdiabet',
+    component: PaperDia
+  },
+  {
+    path:'/paperartrit',
+    component: PaperArt
+  },
+  {
     path:'/test',
     component: Test
+  },
+  {
+    path:'/results',
+    component: Testresult
+  },
+  {
+    path:'/subscribe',
+    component: Podpiska
   }
 ]
 

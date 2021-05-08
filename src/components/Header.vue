@@ -6,7 +6,7 @@
             
             <router-link to="/"><img v-on:click="changeClassPolez" style="height:40px" alt="Ausens logo" src="../assets/logo.svg"></router-link>
           </div>
-          <div class="col-sm" style="margin-top:0.5%" v-if="reglog">
+          <div class="col-sm" style="margin-top:0.5%" >
             <a v-on:click="changeClassPolez"><router-link  :class="poleznoe" to="/">Полезное</router-link></a>
             <a v-on:click="changeClassRec"><router-link  :class="rec" style="margin-left:10%" to="/recomendation">Рекомендации</router-link></a>
             <a v-on:click="changeClassTren"><router-link  :class="tren" style="margin-left:10%" to="/trainings">Тренировки</router-link></a>

@@ -28,7 +28,7 @@
                 <img src="../assets/solution.svg" alt="...">
               </div>
               <div class="col-sm-7 mt-4">
-                  <a class="h3" href="#" :class="classes_dim" style="text-decoration: none;">Деменция</a>
+                  <router-link class="h3" to="/paperdem" :class="classes_dim" style="text-decoration: none;">Деменция</router-link>
               </div>
               <div class="col-sm-2" style="margin-top:5%">
                 <img :src="src_dim" alt="">
@@ -45,7 +45,7 @@
                 <img src="../assets/diabet.svg" alt="...">
               </div>
               <div class="col-sm-7 mt-4">
-                  <a class="h3" href="#" :class="classes_dia" style="text-decoration: none;">Сахарный диабет</a>
+                  <router-link class="h3" to="/paperdiabet" :class="classes_dia" style="text-decoration: none;">Сахарный диабет</router-link>
               </div>
               <div class="col-sm-2" style="margin-top:5%">
                 <img :src="src_dia" alt="">
@@ -60,7 +60,7 @@
                 <img src="../assets/arthritis.svg" alt="...">
               </div>
               <div class="col-sm-7 mt-4">
-                  <a class="h3" href="#" :class="classes_ar" style="text-decoration: none;">Артрит</a>
+                  <router-link class="h3" to="/paperartrit" :class="classes_ar" style="text-decoration: none;">Артрит</router-link>
               </div>
               <div class="col-sm-2" style="margin-top:5%">
                 <img :src="src_ar" alt="">

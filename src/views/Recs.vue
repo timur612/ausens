@@ -14,6 +14,33 @@
         </div>
         <div v-if="authed">
             <!-- Modal -->
+            <div class="modal fade" id="buyModal" tabindex="-1" aria-labelledby="buyModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="row p-3">
+                        <div class="col-sm-9" style="margin-left:7%"><h4 style="font-weight:600" class="modal-title" id="buyModalLabel">Доступ к индивидуальным рекомендациям всего <span style="color:#11B46F">530 ₽</span></h4></div>
+                        <div class="col-sm" style="margin-left:4%"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                    </div>
+                    <div class="modal-body" >
+                        <p style="font-weight:600;margin-left:7%">Вы получаете:</p>
+                        <ul style="list-style-type: none;">
+                            <li style="font-weight:590"><span style="color:#3E8CBF;font-size:1.5rem;margin-right:2%">✦</span> индивидуальные тренировки</li>
+                            <li style="font-weight:590"><span style="color:#3E8CBF;font-size:1.5rem;margin-right:2%">✦</span> рекомендации от наших специалистов</li>
+                            <li style="font-weight:590"><span style="color:#3E8CBF;font-size:1.5rem;margin-right:2%">✦</span> доступ к полезным статьям</li>
+                        </ul>
+                    </div>
+                    <div class="mb-5 text-center">
+                        <a v-on:click="goToPodpiskaPage" data-bs-dismiss="modal" class="btn" style="padding-top:1.5%;
+    padding-bottom:1.5%;
+    padding-left:10%;
+    padding-right:10%;
+    color:white;
+    font-weight: 500;background-color:#11B46F">Купить</a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content" style="padding:2rem">
@@ -44,13 +71,29 @@
             </div>
             <div class="row mt-4">
                 <div class="col-sm" v-for="(sovet,index) in sovets" :key="index">
-                    <div class="card text-white" style="border-radius:40%;width:18rem">
+                    <div class="card text-white" style="border-radius:40%;width:18rem;" v-if="sovet.dostup">
                         <img :src="sovet.img" class="card-img" alt="...">
                         <div class="card-img-overlay">
                             <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal" class="card-title d-flex justify-content-end" style="color:white"> <img style="width:12%" src="../assets/whiteRight.svg" alt=""> </a>
                             <p class="card-text" style="margin-top:54%;margin-left:2%;font-size:1.4rem;font-weight: 550;width:12rem"> {{sovet.text}} </p>
                         </div>
                     </div>
+
+                    <div style="position:relative"  v-if="!sovet.dostup">
+                        <div tabindex="0" class="card text-white blur" style="border-radius:40%;width:18rem;">
+                            
+                            <img :src="sovet.img" class="card-img" alt="...">
+                            <div class="card-img-overlay">
+                                <!-- <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal" class="card-title d-flex justify-content-end" style="color:white"> <img style="width:12%" src="../assets/whiteRight.svg" alt=""> </a> -->
+                                <p class="card-text" style="margin-top:54%;margin-left:2%;font-size:1.4rem;font-weight: 550;width:12rem"> {{sovet.text}} </p>
+                            </div>
+                        </div>
+                        <div style="position:absolute;top:5rem;left:2rem;cursor:pointer" data-bs-toggle="modal" data-bs-target="#buyModal">
+                            <img src="../assets/lock.svg" class="d-flex justify-content-center" style="margin-left:30%" alt="...">
+                            <p class="h3 mt-3" style="color:white">Посмотреть все</p>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
             <div class="row" style="margin-top:5%">
@@ -90,14 +133,19 @@ export default {
     data(){
         return{
             authed: false,
-            sovets:[{img:require('../assets/cardpic.svg'),text:'Ограничьте курение и употребление алкоголя'},
-                    {img:require('../assets/cardpic2.svg'),text:'Питаться сбалансированои пить достаточно воды'},
-                    {img:require('../assets/cardpic.svg'),text:'Ограничьте курение и употребление алкоголя'},
-                    {img:require('../assets/cardpic2.svg'),text:'Питаться сбалансированои пить достаточно воды'}],
+            sovets:[{img:require('../assets/cardpic.svg'),text:'Ограничьте курение и употребление алкоголя',dostup:true},
+                    {img:require('../assets/cardpic2.svg'),text:'Питаться сбалансированои пить достаточно воды',dostup:true},
+                    {img:require('../assets/cardpic.svg'),text:'Ограничьте курение и употребление алкоголя',dostup:false},
+                    {img:require('../assets/cardpic2.svg'),text:'Питаться сбалансированои пить достаточно воды',dostup:false}],
             specialisti:[
                 {img:require('../assets/cardpic3.svg'),text:'Как пройти обследование?'},
                 {img:require('../assets/cardpic3.svg'),text:'Как пройти обследование?'}
             ]
+        }
+    },
+    methods:{
+        goToPodpiskaPage(){
+            this.$router.push({path:'/subscribe'})
         }
     },
     created(){
@@ -123,5 +171,8 @@ export default {
     opacity:0.5;
     background-color:black;
     width:19%; height:7%;
+}
+.blur{
+    filter:blur(0.4rem);
 }
 </style>

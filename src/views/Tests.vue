@@ -77,6 +77,20 @@ export default {
                     this.btnText = 'Завершить'
                 }
             }else{
+                axios
+                    .patch('https://ausensai.herokuapp.com/users/'+localStorage.getItem('token'),
+                            JSON.stringify({
+                                age: this.answers[0],
+                                weight: this.answers[1],
+                                height: this.answers[2]
+                            }),
+                            {headers: {"Content-Type": "application/json"  }})
+                    .then(res=>{
+                        console.log(res.data);
+                    })
+                    .catch(e=>{
+                        console.log(e);
+                    })
                 this.answers.shift();
                 // this.answers.pop();
                 // this.answers.push('нет');
@@ -100,7 +114,7 @@ export default {
                             }),
                             {headers: {"Content-Type": "application/json"  }})
                         .then(res=>{
-                            this.$router.push({path:'/'});
+                            this.$router.push({path:'/results'});
                         })
                         .catch(e=>{
                             console.log(e)

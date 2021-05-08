@@ -9,6 +9,34 @@
 
             <div v-if="bscreen" class="overlay"></div>
 
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="row p-3">
+                        <div class="col-sm-9" style="margin-left:7%"><h4 style="font-weight:600" class="modal-title" id="exampleModalLabel">Доступ к индивидуальным рекомендациям всего <span style="color:#11B46F">530 ₽</span></h4></div>
+                        <div class="col-sm" style="margin-left:4%"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                    </div>
+                    <div class="modal-body" >
+                        <p style="font-weight:600;margin-left:7%">Вы получаете:</p>
+                        <ul style="list-style-type: none;">
+                            <li style="font-weight:590"><span style="color:#3E8CBF;font-size:1.5rem;margin-right:2%">✦</span> индивидуальные тренировки</li>
+                            <li style="font-weight:590"><span style="color:#3E8CBF;font-size:1.5rem;margin-right:2%">✦</span> рекомендации от наших специалистов</li>
+                            <li style="font-weight:590"><span style="color:#3E8CBF;font-size:1.5rem;margin-right:2%">✦</span> доступ к полезным статьям</li>
+                        </ul>
+                    </div>
+                    <div class="mb-5 text-center">
+                        <a v-on:click="goToPodpiskaPage" data-bs-dismiss="modal"  class="btn" style="padding-top:1.5%;
+    padding-bottom:1.5%;
+    padding-left:10%;
+    padding-right:10%;
+    color:white;
+    font-weight: 500;background-color:#11B46F">Купить</a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
             <div v-if="clicked" class=" row shadow-sm p-3 mb-5 bg-body rounded" :class="classModal" style="background-color:white;position:absolute; width:30%; left:21rem;top:15.8rem">
                     <form>
                         <div class="mb-3">
@@ -16,8 +44,26 @@
                             <input  v-model="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                         </div>
                         <div class="row">
-                            <div class="col-sm"><button class="btn backbtn" v-on:click="changeEmail" style="background-color: #11B46F;">Сохранить</button></div>
+                            <div class="col-sm"><a class="btn backbtn" v-on:click="changeEmail" style="background-color: #11B46F;">Сохранить</a></div>
                             <div class="col-sm"><p v-on:click="onChangeClose" class="btn backbtn" style="cursor: pointer;background-color: #fffff;color:black;border:0.01rem solid black">Отменить</p></div>
+                        </div>
+                        
+                    </form>
+            </div>
+
+            <div v-if="clickedName" class=" row shadow-sm p-3 mb-5 bg-body rounded" :class="classModal" style="background-color:white;position:absolute; width:30%; left:21rem;top:10rem">
+                    <form>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Введите имя</label>
+                            <input  v-model="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Введите фамилию</label>
+                            <input  v-model="lastname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                        <div class="row">
+                            <div class="col-sm"><a class="btn backbtn"  v-on:click="changeName" style="background-color: #11B46F;">Сохранить</a></div>
+                            <div class="col-sm"><p v-on:click="onChangeNameClose" :class="namebtnclose" class="btn backbtn" style="cursor: pointer;background-color: #fffff;color:black;border:0.01rem solid black">Отменить</p></div>
                         </div>
                         
                     </form>
@@ -42,7 +88,7 @@
                         <p class="h2"> {{name}} {{lastname}}</p>
                     </div>
                     <div class="col-sm">
-                        <p class="mt-3" style="cursor: pointer;color:#3E8CBF">Изменить</p>
+                        <p class="mt-3" style="cursor: pointer;color:#3E8CBF" v-on:click="onChangeNameShow">Изменить</p>
                     </div>
                 </div>
 
@@ -105,9 +151,17 @@
             <div class="col-sm-6" v-if="isTest">
                 <p class="h3"> Предрасположенность к болезням: </p>
                 <p class="h5 mt-4" v-if="testResult===''"> Чтобы узнать рекомендации, пройдите тестирование </p>
-                <p class="h4 mt-5" v-if="testResult!==''">Высокая вероятность, что у Вас предрасположенность к <span style="color:#11B46F">{{testResult}}</span> </p>
+                <p class="h4 mt-5" v-if="testResult!==''">Высокая вероятность, что у Вас предрасположенность к <span style="">{{testResult}}</span> </p>
                 <div class="progress mt-3">
                     <div class="progress-bar" role="progressbar" style="width: 90%;background-color:#11B46F" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-sm">
+                        <router-link to="/test" class="btn backbtn" style="background-color:#3E8CBF">Пройти еще раз</router-link>
+                    </div>
+                    <div class="col-sm">
+                        <router-link to="/recomendation" class="btn backbtn" style="background-color:#11B46F">Перейти к рекомендациям</router-link>
+                    </div>
                 </div>
                 <!-- <div class="row mt-5">
                     <div class="col-sm">
@@ -141,8 +195,8 @@
 
             <div class="col-sm-6" v-if="isPodpiska">
                 <p class="h3" style="font-weight:590"> Подписка не оформлена </p>
-
-                <p class="h5 mt-5" style="color:#11B46F;cursor:pointer">Оформить подписку</p>
+                
+                <p class="h5 mt-5" style="color:#11B46F;cursor:pointer" data-bs-toggle="modal" data-bs-target="#exampleModal">Оформить подписку</p>
             </div>
         </div>
     </div>
@@ -153,6 +207,8 @@ import axios from 'axios';
 export default {
     data(){
         return{
+            namebtnclose:'',
+            clickedName: false,
             bscreen:false,
             isUchet: true,
             isTest: false,
@@ -163,9 +219,9 @@ export default {
             classModal:'',
             name:'',
             lastname: '',
-            age:'64',
-            height:'170',
-            weight:'70',
+            age:'',
+            height:'',
+            weight:'',
             email:'',
         }
     },
@@ -193,6 +249,14 @@ export default {
             this.clicked = false;
             // this.classModal = '';
         },
+        onChangeNameShow(){
+            this.namebtnclose = '';
+            this.clickedName = true;
+        },
+        onChangeNameClose(){
+            this.clickedName = false;
+            
+        },
         onChangeShowExit(){
             this.exitClicked = true;
             this.bscreen = true;
@@ -206,6 +270,7 @@ export default {
             this.$router.push('/')
         },
         changeEmail(){
+            this.clicked = false;
             axios
                 .patch('https://ausensai.herokuapp.com/users/'+localStorage.getItem('token'),
                 JSON.stringify({
@@ -218,6 +283,25 @@ export default {
                 .catch(e=>{
                     console.log(e)
                 })
+        },
+        changeName(){
+            this.clickedName = false;
+            axios
+                .patch('https://ausensai.herokuapp.com/users/'+localStorage.getItem('token'),
+                    JSON.stringify({
+                        name: this.name,
+                        lastname: this.lastname
+                    }),
+                    {headers: {"Content-Type": "application/json"  }})
+                .then(res=>{
+                    console.log(res.data.name);
+                })
+                .catch(e=>{
+                    console.log(e)
+                })
+        },
+        goToPodpiskaPage(){
+            this.$router.push({path:'/subscribe'})
         }
         
     },
@@ -227,6 +311,13 @@ export default {
             .then(res=>{
                 this.name = res.data.name;
                 this.lastname = res.data.lastName;
+                this.age = res.data.age;
+                this.weight = res.data.weight;
+                this.height = res.data.height;
+                if(res.data.name=='' || res.data.lastName==''){
+                    this.clickedName =  true;
+                    this.namebtnclose = 'disabled';
+                }
                 this.email = res.data.email;
                 if(res.data.testResult==1){
                     this.testResult = 'Диабет';
@@ -235,7 +326,7 @@ export default {
                     this.testResult = 'Артрит';
                 }
                 if(res.data.testResult==0){
-                    this.testResult = 'Дименция';
+                    this.testResult = 'Деменция';
                 }
                 if(res.data.testResult==4){
                     this.testResult = 'Сердечно-сосудистое заболевание';
